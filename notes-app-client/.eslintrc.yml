@@ -1,0 +1,8 @@
+---
+env:
+  browser: true
+extends:
+  - eslint-config-airbnb
+  - ../.eslintrc.yml
+rules:
+  react/jsx-filename-extension: 0
