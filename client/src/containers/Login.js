@@ -6,7 +6,7 @@ import './Login.css'
 import PropTypes from 'prop-types'
 import LoaderButton from '../components/LoaderButton'
 
-const Login = ({ setIsAuthenticated, history }) => {
+const Login = ({ setIsAuthenticated }) => {
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
   const [isLoading, setIsLoading] = React.useState(false)
@@ -28,7 +28,6 @@ const Login = ({ setIsAuthenticated, history }) => {
     try {
       await Auth.signIn(email, password)
       setIsAuthenticated(true)
-      history.push('/')
     } catch (e) {
       alert(e.message)
       setIsLoading(false)

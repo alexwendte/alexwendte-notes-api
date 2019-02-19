@@ -15,7 +15,9 @@ const Signup = ({ history, setIsAuthenticated }) => {
 
   const validateConfirmationForm = () => values.confirmationCode.length > 0
   const handleChange = event => {
+    Auth.userAttributes('themostcolm@gmail.com').then(console.log, console.err)
     setValues({
+      ...values,
       [event.target.id]: event.target.value,
     })
   }
@@ -28,10 +30,13 @@ const Signup = ({ history, setIsAuthenticated }) => {
     try {
       const createdUser = await Auth.signUp({
         password: values.password,
-        username: values.state.email,
+        username: values.email,
       })
       setNewUser(createdUser)
     } catch (e) {
+      if (e.name === 'UsernameExistsException') {
+        Auth.resendSignUp(values.username)
+      }
       alert(e.message)
     }
 
@@ -68,7 +73,7 @@ const Signup = ({ history, setIsAuthenticated }) => {
           bsSize="large"
           disabled={!validateConfirmationForm()}
           type="submit"
-          isLoading={values.isLoading}
+          isLoading={isLoading}
           text="Verify"
           loadingText="Verifying…"
         />

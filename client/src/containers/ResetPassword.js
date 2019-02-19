@@ -20,11 +20,12 @@ const ResetPassword = () => {
 
   const handleChange = event => {
     setValues({
+      ...values,
       [event.target.id]: event.target.value,
     })
   }
 
-  const handleSendCodeClick = async event => {
+  const handleSendResetEmail = async event => {
     event.preventDefault()
 
     setIsSendingCode(true)
@@ -53,7 +54,7 @@ const ResetPassword = () => {
   }
 
   const renderRequestCodeForm = () => (
-    <form onSubmit={handleSendCodeClick}>
+    <form onSubmit={handleSendResetEmail}>
       <FormGroup bsSize="large" controlId="email">
         <ControlLabel>Email</ControlLabel>
         <FormControl autoFocus type="email" value={values.email} onChange={handleChange} />
@@ -63,7 +64,7 @@ const ResetPassword = () => {
         type="submit"
         bsSize="large"
         loadingText="Sending…"
-        text="Send Confirmation"
+        text="Send Reset Email"
         isLoading={isSendingCode}
         disabled={!validateCodeForm()}
       />

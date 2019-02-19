@@ -17,7 +17,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint --fix ."
+    "lint": "eslint --fix .",
+    "predeploy": "npm run build",
+    "deploy": "aws s3 sync build/ s3://alexwendte-notes-app-client --delete",
+    "postdeploy": "aws cloudfront create-invalidation --distribution-id E3EBHFVJ4JXVQR --paths '/*'"
   },
   "browserslist": [
     ">0.2%",
